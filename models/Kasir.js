@@ -29,11 +29,11 @@ const Kasir = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    alamat: {
+    alamat_k: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    telp_s: {
+    telp_k: {
       type: DataTypes.STRING(20),
       allowNull: false,
     },
@@ -49,14 +49,14 @@ const Kasir = sequelize.define(
   {
     timestamps: true,
     hooks: {
-      beforeCreate: async (user) => {
-        const salt = await bycript.genSalt(10);
-        user.password = await bycript.hash(user.password, salt);
+      beforeCreate: async (kasir) => {
+        const salt = await bcrypt.genSalt(10);
+        kasir.password = await bcrypt.hash(kasir.password, salt);
       },
-      beforeUpdate: async (user) => {
-        if (user.changed("password")) {
-          const salt = await bycript.genSalt(10);
-          user.password = await bycript.hash(user.password, salt);
+      beforeUpdate: async (kasir) => {
+        if (kasir.changed("password")) {
+          const salt = await bcrypt.genSalt(10);
+          kasir.password = await bcrypt.hash(kasir.password, salt);
         }
       },
     },

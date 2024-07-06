@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
 const suplayerRoutes = require("./routes/suplayerRoutes.js");
 const kasirRoutes = require("./routes/kasirRoutes.js");
+const authRoutes = require("./routes/authRoutes.js");
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,7 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Hubungkan semua rute yang terdefinisi
+app.use(authRoutes);
 app.use(suplayerRoutes);
 app.use(kasirRoutes);
 

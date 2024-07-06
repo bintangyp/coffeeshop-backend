@@ -15,6 +15,7 @@ exports.login = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, kasir.password);
+
     if (!isMatch) {
       return res.status(401).json({ error: "WRONG_PASSWORD" });
     }

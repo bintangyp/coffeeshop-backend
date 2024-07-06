@@ -1,6 +1,8 @@
 // Definisikan model Kasir
 const Kasir = require("../models/Kasir");
 
+const bcrypt = require("bcrypt");
+
 exports.getAllKasir = async (req, res) => {
   try {
     const kasir = await Kasir.findAll();
@@ -13,7 +15,6 @@ exports.getAllKasir = async (req, res) => {
 
 exports.createKasir = async (req, res) => {
   const { id_k, username, password, jabatan, alamat_k, telp_k } = req.body;
-  console.log(req);
   try {
     const newKasir = await Kasir.create({
       id_k,
@@ -26,7 +27,7 @@ exports.createKasir = async (req, res) => {
     res.status(201).json(newKasir);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "kasirController: " + err.message });
   }
 };
 
