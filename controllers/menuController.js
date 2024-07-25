@@ -32,6 +32,21 @@ exports.createMenu = async (req, res) => {
   }
 };
 
+exports.updateMenu = async (req, res) => {
+  try {
+    const { kode_m, nama_m, h_jual, h_pokok, gambar } = req.body;
+
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: "NOTFOUND" });
+    }
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.getOneMenu = async (req, res) => {
   try {
     const OneMenu = await Menu.findOne({
@@ -46,6 +61,19 @@ exports.getOneMenu = async (req, res) => {
     res.json({ data: OneMenu });
   } catch (err) {
     console.log(err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.deleteMenu = async (req, res) => {
+  try {
+    const OneMenu = await Menu.findByPk(req.params.id);
+    if (!OneMenu) {
+      return res.status(404).json({ error: "NOTFOUND" });
+    }
+    await OneMenu.destroy();
+    res.status(204).end();
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };

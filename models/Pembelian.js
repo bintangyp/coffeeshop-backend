@@ -5,14 +5,14 @@ const Pembelian = sequelize.define("pembelian", {
   nofaktur: {
     type: DataTypes.STRING(50),
     primaryKey: true,
+    unique: true,
     allowNull: false,
   },
   kode_s: {
     type: DataTypes.STRING(20),
     allowNull: false,
-    unique: true,
   },
-  tgl_pembelian: {
+  tgl_pmb: {
     type: DataTypes.DATE,
     allowNull: false,
   },
