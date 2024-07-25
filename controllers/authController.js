@@ -1,6 +1,6 @@
 // controllers/authController.js
 const jwt = require("jsonwebtoken");
-const Kasir = require("../models/Kasir");
+const Kasir = require("../models/Users");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 

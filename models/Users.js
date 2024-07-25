@@ -2,10 +2,10 @@ const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/database.js");
 const bcrypt = require("bcrypt");
 
-const Kasir = sequelize.define(
-  "Kasir",
+const Users = sequelize.define(
+  "Users",
   {
-    id_k: {
+    id_u: {
       type: DataTypes.STRING(10),
       primaryKey: true,
       allowNull: false,
@@ -21,7 +21,7 @@ const Kasir = sequelize.define(
       validate: {
         len: {
           args: [6, 100],
-          msg: "MIN_LENGTH",
+          msg: "PASS_MIN_LENGTH",
         },
       },
     },
@@ -29,11 +29,11 @@ const Kasir = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    alamat_k: {
+    alamat_u: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    telp_k: {
+    telp_u: {
       type: DataTypes.STRING(20),
       allowNull: false,
     },
@@ -49,18 +49,18 @@ const Kasir = sequelize.define(
   {
     timestamps: true,
     hooks: {
-      beforeCreate: async (kasir) => {
+      beforeCreate: async (user) => {
         const salt = await bcrypt.genSalt(10);
-        kasir.password = await bcrypt.hash(kasir.password, salt);
+        user.password = await bcrypt.hash(user.password, salt);
       },
-      beforeUpdate: async (kasir) => {
-        if (kasir.changed("password")) {
+      beforeUpdate: async (user) => {
+        if (user.changed("password")) {
           const salt = await bcrypt.genSalt(10);
-          kasir.password = await bcrypt.hash(kasir.password, salt);
+          user.password = await bcrypt.hash(user.password, salt);
         }
       },
     },
   }
 );
 
-module.exports = Kasir;
+module.exports = Users;
