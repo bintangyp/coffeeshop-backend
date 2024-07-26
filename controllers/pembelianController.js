@@ -40,7 +40,7 @@ exports.getOnePembelian = async (req, res) => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
-      where: { kode_m: req.params.id },
+      where: { nofaktur: req.params.id },
     });
     if (!OnePembelian) {
       return res.status(404).json({ error: "Pembelian not found" });

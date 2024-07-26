@@ -1,8 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
-const suplayerRoutes = require("./routes/suplayerRoutes.js");
-const userRoutes = require("./routes/userRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
 const allroutes = require("./routes/routes.js");
 
@@ -14,8 +12,6 @@ app.use(bodyParser.json());
 
 // Hubungkan semua rute yang terdefinisi
 app.use(authRoutes);
-app.use(suplayerRoutes);
-app.use(userRoutes);
 app.use(allroutes);
 
 // Sinkronisasi model dengan database

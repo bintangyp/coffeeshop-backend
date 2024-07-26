@@ -2,12 +2,12 @@ const Menu = require("../models/Menu");
 
 exports.getAllMenus = async (req, res) => {
   try {
-    const Menus = await Menu.findAll({
+    const menus = await Menu.findAll({
       attributes: {
         exclude: ["h_pokok", "createdAt", "updatedAt"],
       },
     });
-    res.json({ data: Menus });
+    res.json({ data: menus });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -36,12 +36,12 @@ exports.updateMenu = async (req, res) => {
   try {
     const { kode_m, nama_m, h_jual, h_pokok, gambar } = req.body;
 
-    const user = await User.findByPk(req.params.id);
-    if (!user) {
+    const menu = await Menu.findByPk(req.params.id);
+    if (!menu) {
       return res.status(404).json({ error: "NOTFOUND" });
     }
-    await user.save();
-    res.json(user);
+    await menu.save();
+    res.json(menu);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -49,16 +49,16 @@ exports.updateMenu = async (req, res) => {
 
 exports.getOneMenu = async (req, res) => {
   try {
-    const OneMenu = await Menu.findOne({
+    const menu = await Menu.findOne({
       attributes: {
         exclude: ["h_pokok", "createdAt", "updatedAt"],
       },
       where: { kode_m: req.params.id },
     });
-    if (!OneMenu) {
+    if (!menu) {
       return res.status(404).json({ error: "Menu not found" });
     }
-    res.json({ data: OneMenu });
+    res.json({ data: menu });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err.message });
@@ -67,11 +67,11 @@ exports.getOneMenu = async (req, res) => {
 
 exports.deleteMenu = async (req, res) => {
   try {
-    const OneMenu = await Menu.findByPk(req.params.id);
-    if (!OneMenu) {
+    const menu = await Menu.findByPk(req.params.id);
+    if (!menu) {
       return res.status(404).json({ error: "NOTFOUND" });
     }
-    await OneMenu.destroy();
+    await menu.destroy();
     res.status(204).end();
   } catch (err) {
     res.status(500).json({ error: err.message });

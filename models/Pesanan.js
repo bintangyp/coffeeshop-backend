@@ -11,11 +11,7 @@ const Pesanan = sequelize.define("pesanan", {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
-  jam_psn: {
-    type: DataTypes.TIME,
-    allowNull: false,
-  },
-  tgl_psn: {
+  waktu_psn: {
     type: DataTypes.DATE,
     allowNull: false,
   },
@@ -27,7 +23,7 @@ const Pesanan = sequelize.define("pesanan", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  kode_k: {
+  id_u: {
     type: DataTypes.STRING(10),
     allowNull: false,
   },

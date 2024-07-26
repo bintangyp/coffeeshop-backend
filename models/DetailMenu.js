@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/database.js");
 
-const BahanMenu = sequelize.define("bahan_menu", {
+const DetailMenu = sequelize.define("detail_menu", {
   kode_bm: {
     type: DataTypes.STRING(10),
     primaryKey: true,
@@ -29,4 +29,4 @@ const BahanMenu = sequelize.define("bahan_menu", {
   },
 });
 
-module.exports = BahanMenu;
+module.exports = DetailMenu;

@@ -11,19 +11,11 @@ const DetailPesanan = sequelize.define("detail_pesanan", {
     type: DataTypes.STRING(10),
     allowNull: false,
   },
-  jam_psn: {
-    type: DataTypes.TIME,
-    allowNull: false,
-  },
-  tgl_psn: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  status_psn: {
+  kode_m: {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
-  total_psn: {
+  jml_psn: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
