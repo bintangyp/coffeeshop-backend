@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+// const upload = require("../config/samulter.js");
 const hutangController = require("../controllers/HutangController");
 const allControllers = require("../controllers/allControllers");
 const menuController = require("../controllers/menuController");

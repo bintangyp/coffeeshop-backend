@@ -1,14 +1,15 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
 const authRoutes = require("./routes/authRoutes.js");
 const allroutes = require("./routes/routes.js");
+const FileUpload = require("express-fileupload");
 
 const app = express();
 const port = 3000;
 
-// Konfigurasi body-parser untuk mengambil data dari body permintaan
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(FileUpload());
+app.use(express.static("uploads"));
 
 // Hubungkan semua rute yang terdefinisi
 app.use(authRoutes);
