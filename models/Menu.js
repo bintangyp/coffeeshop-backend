@@ -12,11 +12,11 @@ const Menu = sequelize.define("menu", {
     allowNull: false,
   },
   h_jual: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   h_pokok: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   gambar: {

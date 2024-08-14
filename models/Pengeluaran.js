@@ -16,7 +16,7 @@ const Pengeluaran = sequelize.define("pengeluaran", {
     allowNull: false,
   },
   biaya: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   id_k: {

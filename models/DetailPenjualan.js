@@ -1,30 +1,30 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/database.js");
 
-const Pesanan = sequelize.define("pesanan", {
-  nopsn: {
+const DetailPenjualan = sequelize.define("detail_penjualan", {
+  id_dpnj: {
     type: DataTypes.STRING(10),
     primaryKey: true,
     allowNull: false,
   },
-  n_pemesan: {
-    type: DataTypes.STRING(100),
+  nopnj: {
+    type: DataTypes.STRING(10),
     allowNull: false,
   },
-  waktu_psn: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  status_psn: {
+  kode_m: {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
-  total_psn: {
+  jml_pnj: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  id_u: {
-    type: DataTypes.STRING(10),
+  hpp: {
+    type: DataTypes.DOUBLE,
+    allowNull: false,
+  },
+  h_jual: {
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   createdAt: {
@@ -37,4 +37,4 @@ const Pesanan = sequelize.define("pesanan", {
   },
 });
 
-module.exports = Pesanan;
+module.exports = DetailPenjualan;

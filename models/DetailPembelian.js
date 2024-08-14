@@ -20,7 +20,7 @@ const DetailPembelian = sequelize.define("detail_pembelian", {
     allowNull: false,
   },
   h_beli: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   createdAt: {

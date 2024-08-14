@@ -17,11 +17,11 @@ const BahanPokok = sequelize.define("bahan_pokok", {
     allowNull: false,
   },
   h_pokok: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   stok: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   createdAt: {

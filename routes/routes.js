@@ -3,15 +3,16 @@ const router = express.Router();
 // const upload = require("../config/samulter.js");
 const hutangController = require("../controllers/HutangController");
 const allControllers = require("../controllers/allControllers");
+const authController = require("../controllers/authController.js");
 const menuController = require("../controllers/menuController");
 const pembelianController = require("../controllers/pembelianController");
 const dpembelianController = require("../controllers/dpembelianController");
 const bpokokController = require("../controllers/bpokokController");
 const dmenuController = require("../controllers/dmenuController");
-const pesananController = require("../controllers/pesananController");
-const dpesananController = require("../controllers/dpesananController");
+const dpenjualanController = require("../controllers/dpenjualanController.js");
 const userController = require("../controllers/userController.js");
 const suplayerController = require("../controllers/suplayerController.js");
+const transaksiController = require("../controllers/transaksiController.js");
 
 const authenticateToken = require("../middlewares/authMiddleware");
 
@@ -23,7 +24,12 @@ router.put("user/:id", authenticateToken, userController.updateUser);
 router.delete("user/:id", authenticateToken, userController.deleteUser);
 
 // routing Suplayer
-router.get("/suplayer", authenticateToken, suplayerController.getAllSuplayers);
+router.get(
+  "/suplayer",
+  authController.checkBlacklist,
+  authenticateToken,
+  suplayerController.getAllSuplayers
+);
 router.get(
   "/suplayer/:id",
   authenticateToken,
@@ -100,34 +106,58 @@ router.post("/dmenu", authenticateToken, dmenuController.createdMenu);
 router.put("/dmenu/:id", authenticateToken, dmenuController.updatedMenu);
 router.delete("/dmenu/:id", authenticateToken, dmenuController.deletedMenu);
 
-// routing pesanan
-router.get("/pesanan", authenticateToken, pesananController.getAllPesanan);
-router.get("/pesanan/:id", authenticateToken, pesananController.getPesananById);
-router.post("/pesanan", authenticateToken, pesananController.createPesanan);
-router.put("/pesanan/:id", authenticateToken, pesananController.updatePesanan);
-router.delete(
-  "/pesanan/:id",
+// routing dpenjualan
+router.get(
+  "/dpenjualan",
   authenticateToken,
-  pesananController.deletePesanan
+  dpenjualanController.getAlldPenjualan
+);
+router.get(
+  "/dpenjualan/:id",
+  authenticateToken,
+  dpenjualanController.getdPenjualanById
+);
+router.post(
+  "/dpenjualan",
+  authenticateToken,
+  dpenjualanController.createdPenjualan
+);
+router.put(
+  "/dpenjualan/:id",
+  authenticateToken,
+  dpenjualanController.updatedPenjulalan
+);
+router.delete(
+  "/dpenjualan/:id",
+  authenticateToken,
+  dpenjualanController.deletedPenjualan
 );
 
-// routing dpesanan
-router.get("/dpesanan", authenticateToken, dpesananController.getAlldPesanan);
+// routing transaksi
 router.get(
-  "/dpesanan/:id",
+  "/transaksi",
   authenticateToken,
-  dpesananController.getdPesananById
+  transaksiController.getAllTransaksi
 );
-router.post("/dpesanan", authenticateToken, dpesananController.createdPesanan);
-router.put(
-  "/dpesanan/:id",
+router.get(
+  "/transaksi/:id",
   authenticateToken,
-  dpesananController.updatedPesanan
+  transaksiController.getTransaksiById
+);
+router.post(
+  "/transaksi",
+  authenticateToken,
+  transaksiController.createTransaksi
+);
+router.put(
+  "/transaksi/:id",
+  authenticateToken,
+  transaksiController.updateTransaksi
 );
 router.delete(
-  "/dpesanan/:id",
+  "/transaksi/:id",
   authenticateToken,
-  dpesananController.deletedPesanan
+  transaksiController.deleteTransaksi
 );
 
 module.exports = router;

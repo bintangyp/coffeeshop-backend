@@ -27,7 +27,7 @@ const Pembelian = sequelize.define("pembelian", {
     allowNull: false,
   },
   total_pmb: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   createdAt: {

@@ -1,6 +1,7 @@
 // controllers/authController.js
 const jwt = require("jsonwebtoken");
 const Kasir = require("../models/Users");
+const Blacklist = require("../models/Blacklist");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
@@ -31,4 +32,41 @@ exports.login = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+exports.logout = async (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  try {
+    // Verifikasi token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Simpan token di blacklist dengan waktu kedaluwarsa yang sama
+    await Blacklist.create({
+      token,
+      expiresAt: new Date(decoded.exp * 1000), // Exp adalah dalam detik Unix
+    });
+
+    res.json({ message: "Logged out successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Middleware untuk mengecek apakah token ada di blacklist
+exports.checkBlacklist = async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  const blacklistedToken = await Blacklist.findOne({ where: { token } });
+  if (blacklistedToken) {
+    return res.status(401).json({ message: "Token has been logged out" });
+  }
+
+  next();
 };
