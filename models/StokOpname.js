@@ -1,35 +1,33 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/database.js");
 
-const Hutang = sequelize.define("Hutang", {
-  nohutang: {
+const StokOpname = sequelize.define("stok_opname", {
+  id_opname: {
     type: DataTypes.STRING(10),
     primaryKey: true,
-    allowNull: false,
-  },
-  nopmb: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-  },
-  kode_s: {
-    type: DataTypes.STRING(20),
-    allowNull: false,
     unique: true,
+    allowNull: false,
   },
-  waktu_tempo: {
+  waktu_opname: {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  status: {
-    type: DataTypes.ENUM("lunas", "belum lunas"),
+  kode_b: {
+    type: DataTypes.STRING(10),
     allowNull: false,
   },
-  total_hutang: {
-    type: DataTypes.DOUBLE,
-    allowNull: false,
+  jml_tercatat: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
   },
-  sisa: {
-    type: DataTypes.DOUBLE,
+  jml_fisik: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  status_opname: {
+    type: DataTypes.ENUM({
+      values: ["sesuai", "tidak sesuai"],
+    }),
     allowNull: false,
   },
   createdAt: {
@@ -42,4 +40,4 @@ const Hutang = sequelize.define("Hutang", {
   },
 });
 
-module.exports = Hutang;
+module.exports = StokOpname;

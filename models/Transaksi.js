@@ -10,30 +10,26 @@ const Transaksi = sequelize.define(
       unique: true,
       allowNull: false,
     },
-    tipe_trans: {
+    jenis_trans: {
       type: DataTypes.ENUM({
-        values: ["jual", "beli"],
+        values: ["jual", "beli", "hutang", "pembelian"],
       }),
       allowNull: false,
     },
-    nopmb: {
+    no_ref: {
       type: DataTypes.STRING(50),
       allowNull: true,
     },
-    nopnj: {
-      type: DataTypes.STRING(10),
+    masuk: {
+      type: DataTypes.DOUBLE,
       allowNull: true,
     },
-    nopng: {
-      type: DataTypes.STRING(10),
+    keluar: {
+      type: DataTypes.DOUBLE,
       allowNull: true,
     },
     waktu_trans: {
       type: DataTypes.DATE,
-      allowNull: false,
-    },
-    total_trans: {
-      type: DataTypes.DOUBLE,
       allowNull: false,
     },
     u_id: {
@@ -52,13 +48,13 @@ const Transaksi = sequelize.define(
   {
     hooks: {
       beforeCreate: (transaksi, options) => {
-        if (!transaksi.nopmb && !transaksi.nopnj && !transaksi.nopng) {
-          throw new Error("Either nopmb or nopnj or nopng must be provided.");
+        if (!transaksi.masuk && !transaksi.keluar) {
+          throw new Error("NOTRANSACTION");
         }
       },
       beforeUpdate: (transaksi, options) => {
-        if (!transaksi.nopmb && !transaksi.nopnj && !transaksi.nopng) {
-          throw new Error("Either nopmb or nopnj or nopng must be provided.");
+        if (!transaksi.masuk && !transaksi.keluar) {
+          throw new Error("NOTRANSACTION");
         }
       },
     },

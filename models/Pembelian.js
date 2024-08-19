@@ -2,7 +2,7 @@ const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/database.js");
 
 const Pembelian = sequelize.define("pembelian", {
-  nofaktur: {
+  nopmb: {
     type: DataTypes.STRING(50),
     primaryKey: true,
     unique: true,
@@ -12,17 +12,17 @@ const Pembelian = sequelize.define("pembelian", {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
-  tgl_pmb: {
+  waktu_pmb: {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  tgl_tempo: {
+  waktu_tempo: {
     type: DataTypes.DATE,
     allowNull: false,
   },
   status_pmb: {
     type: DataTypes.ENUM({
-      values: ["cash", "hutang"],
+      values: ["cash", "kredit"],
     }),
     allowNull: false,
   },

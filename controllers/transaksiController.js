@@ -33,26 +33,17 @@ exports.getTransaksiById = async (req, res) => {
 };
 
 exports.createTransaksi = async (req, res) => {
-  const {
-    notrans,
-    tipe_trans,
-    nopmb,
-    nopnj,
-    nopng,
-    waktu_trans,
-    total_trans,
-    u_id,
-  } = req.body;
+  const { notrans, jenis_trans, no_ref, masuk, keluar, waktu_trans, u_id } =
+    req.body;
 
   try {
     const transaksi = await Transaksi.create({
       notrans,
-      tipe_trans,
-      nopmb,
-      nopnj,
-      nopng,
+      jenis_trans,
+      no_ref,
+      masuk,
+      keluar,
       waktu_trans,
-      total_trans,
       u_id,
     });
     res.status(201).json(transaksi);
@@ -64,20 +55,18 @@ exports.createTransaksi = async (req, res) => {
 
 exports.updateTransaksi = async (req, res) => {
   try {
-    const { tipe_trans, nopmb, nopnj, nopng, waktu_trans, total_trans, u_id } =
-      req.body;
+    const { jenis_trans, no_ref, masuk, keluar, waktu_trans, u_id } = req.body;
 
     const transaksi = await Transaksi.findByPk(req.params.id);
     if (!transaksi) {
       return res.status(404).json({ error: "NOT_FOUND" });
     }
 
-    transaksi.tipe_trans = tipe_trans;
-    transaksi.nopmb = nopmb;
-    transaksi.nopnj = nopnj;
-    transaksi.nopng = nopng;
+    transaksi.jenis_trans = jenis_trans;
+    transaksi.no_ref = no_ref;
+    transaksi.masuk = masuk;
+    transaksi.keluar = keluar;
     transaksi.waktu_trans = waktu_trans;
-    transaksi.total_trans = total_trans;
     transaksi.u_id = u_id;
     await transaksi.save();
     res.json(transaksi);

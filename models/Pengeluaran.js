@@ -19,7 +19,7 @@ const Pengeluaran = sequelize.define("pengeluaran", {
     type: DataTypes.DOUBLE,
     allowNull: false,
   },
-  id_k: {
+  id_u: {
     type: DataTypes.STRING(10),
     allowNull: false,
   },

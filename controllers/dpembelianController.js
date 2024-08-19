@@ -33,11 +33,11 @@ exports.getdPembelianById = async (req, res) => {
 };
 
 exports.createdPembelian = async (req, res) => {
-  const { kode_dp, nofaktur, kode_b, jml_beli, h_beli } = req.body;
+  const { kode_dp, nopmb, kode_b, jml_beli, h_beli } = req.body;
   try {
     const dpembelian = await dPembelian.create({
       kode_dp,
-      nofaktur,
+      nopmb,
       kode_b,
       jml_beli,
       h_beli,
@@ -51,13 +51,13 @@ exports.createdPembelian = async (req, res) => {
 
 exports.updatedPembelian = async (req, res) => {
   try {
-    const { nofaktur, kode_b, jml_beli, h_beli } = req.body;
+    const { nopmb, kode_b, jml_beli, h_beli } = req.body;
     const dpembelian = await dPembelian.findByPk(req.params.id);
     if (!dpembelian) {
       return res.status(404).json({ error: "NOT_FOUND" });
     }
 
-    dpembelian.nofaktur = nofaktur;
+    dpembelian.nopmb = nopmb;
     dpembelian.kode_b = kode_b;
     dpembelian.jml_beli = jml_beli;
     dpembelian.h_beli = h_beli;

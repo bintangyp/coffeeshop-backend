@@ -7,7 +7,7 @@ const DetailPembelian = sequelize.define("detail_pembelian", {
     primaryKey: true,
     allowNull: false,
   },
-  nofaktur: {
+  nopmb: {
     type: DataTypes.STRING(50),
     allowNull: false,
   },

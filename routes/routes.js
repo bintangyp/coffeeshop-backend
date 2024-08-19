@@ -1,18 +1,19 @@
 const express = require("express");
 const router = express.Router();
 // const upload = require("../config/samulter.js");
-const hutangController = require("../controllers/HutangController");
-const allControllers = require("../controllers/allControllers");
+const hutangController = require("../controllers/hutangController");
 const authController = require("../controllers/authController.js");
 const menuController = require("../controllers/menuController");
 const pembelianController = require("../controllers/pembelianController");
 const dpembelianController = require("../controllers/dpembelianController");
 const bpokokController = require("../controllers/bpokokController");
 const dmenuController = require("../controllers/dmenuController");
+const penjualanController = require("../controllers/penjualanController.js");
 const dpenjualanController = require("../controllers/dpenjualanController.js");
 const userController = require("../controllers/userController.js");
 const suplayerController = require("../controllers/suplayerController.js");
 const transaksiController = require("../controllers/transaksiController.js");
+const pengeluaranController = require("../controllers/pengeluaranController.js");
 
 const authenticateToken = require("../middlewares/authMiddleware");
 
@@ -41,7 +42,8 @@ router.post("/suplayer", authenticateToken, suplayerController.createSuplayer);
 router.get("/menu", authenticateToken, menuController.getAllMenus);
 router.get("/menu/:id", authenticateToken, menuController.getOneMenu);
 router.post("/menu", authenticateToken, menuController.createMenu);
-router.delete("/menu", authenticateToken, menuController.deleteMenu);
+router.put("/menu/:id", authenticateToken, menuController.updateMenu);
+router.delete("/menu/:id", authenticateToken, menuController.deleteMenu);
 
 // routing Pembelian
 router.get(
@@ -106,7 +108,61 @@ router.post("/dmenu", authenticateToken, dmenuController.createdMenu);
 router.put("/dmenu/:id", authenticateToken, dmenuController.updatedMenu);
 router.delete("/dmenu/:id", authenticateToken, dmenuController.deletedMenu);
 
-// routing dpenjualan
+// routing pengeluaran
+router.get(
+  "/pengeluaran",
+  authenticateToken,
+  pengeluaranController.getAllPengeluaran
+);
+router.get(
+  "/pengeluaran/:id",
+  authenticateToken,
+  pengeluaranController.getPengeluaranById
+);
+router.post(
+  "/pengeluaran",
+  authenticateToken,
+  pengeluaranController.createPengeluaran
+);
+router.put(
+  "/pengeluaran/:id",
+  authenticateToken,
+  pengeluaranController.updatePengeluaran
+);
+router.delete(
+  "/pengeluaran/:id",
+  authenticateToken,
+  pengeluaranController.deletedPengeluaran
+);
+
+// routing penjualan
+router.get(
+  "/penjualan",
+  authenticateToken,
+  penjualanController.getAllPenjualan
+);
+router.get(
+  "/penjualan/:id",
+  authenticateToken,
+  penjualanController.getPenjualanById
+);
+router.post(
+  "/penjualan",
+  authenticateToken,
+  penjualanController.createPenjualan
+);
+router.put(
+  "/penjualan/:id",
+  authenticateToken,
+  penjualanController.updatePenjualan
+);
+router.delete(
+  "/penjualan/:id",
+  authenticateToken,
+  penjualanController.deletePenjualan
+);
+
+// routing detail penjualan
 router.get(
   "/dpenjualan",
   authenticateToken,

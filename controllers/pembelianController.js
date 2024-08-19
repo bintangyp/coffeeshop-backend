@@ -15,15 +15,15 @@ exports.getAllPembelians = async (req, res) => {
 };
 
 exports.createPembelian = async (req, res) => {
-  const { nofaktur, kode_s, tgl_pmb, tgl_tempo, status_pmb, total_pmb } =
+  const { nopmb, kode_s, waktu_pmb, waktu_tempo, status_pmb, total_pmb } =
     req.body;
   console.log(req);
   try {
     const newPembelian = await Pembelian.create({
-      nofaktur,
+      nopmb,
       kode_s,
-      tgl_pmb,
-      tgl_tempo,
+      waktu_pmb,
+      waktu_tempo,
       status_pmb,
       total_pmb,
     });
@@ -49,6 +49,26 @@ exports.getOnePembelian = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err.message });
+  }
+};
+
+exports.updatePembelian = async (req, res) => {
+  try {
+    const { kode_s, waktu_pmb, waktu_tempo, status_pmb, total_pmb } = req.body;
+
+    const pembelian = await Pembelian.findByPk(req.params.id);
+    if (!pembelian) {
+      return res.status(404).json({ error: "NOT_FOUND" });
+    }
+    pembelian.kode_s = kode_s;
+    pembelian.waktu_pmb = waktu_pmb;
+    pembelian.waktu_tempo = waktu_tempo;
+    pembelian.status_pmb = status_pmb;
+    pembelian.total_pmb = total_pmb;
+    await pembelian.save();
+    res.json(pembelian);
+  } catch (err) {
+    res.status(500).json({ error: err.errors[0].message });
   }
 };
 
